@@ -48,6 +48,7 @@ public class ClientController {
         Client client = new Client(model);
         LoanApplication loan = loanApplicationRepository.findByLoanId(model.getLoanId());
         if (loan != null) {
+            log.info("Load exists in database. Add to client", loan.getLoanId());
             client.getLoan().add(loan);
         }
         clientRepository.save(client);

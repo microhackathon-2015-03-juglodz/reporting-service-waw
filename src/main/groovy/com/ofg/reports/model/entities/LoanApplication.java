@@ -1,12 +1,14 @@
 package com.ofg.reports.model.entities;
 
-import com.ofg.reports.model.LoanApplicationDto;
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.math.BigDecimal;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import com.ofg.reports.model.LoanApplicationDto;
 
 /**
  * @author mzielinski on 21.03.15.
@@ -30,6 +32,9 @@ public class LoanApplication extends AbstractPersistable<Long> {
     private BigDecimal amount;
     private String fraudStatus;
     private String decision;
+
+    @ManyToOne
+    @JoinColumn
     private Client client;
 
     public String getLoanId() {

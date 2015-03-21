@@ -3,6 +3,7 @@ package com.ofg.reports.model.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -30,8 +31,8 @@ public class Client extends AbstractPersistable<Long> {
         age = dto.getAge();
     }
 
-    @OneToMany(targetEntity=LoanApplication.class, mappedBy="client", fetch= FetchType.EAGER)
-    private List<LoanApplication> loan;
+    @OneToMany(targetEntity=LoanApplication.class, mappedBy="client", fetch= FetchType.EAGER, cascade={CascadeType.ALL})
+    private List<LoanApplication> loan = new ArrayList<>();
 
     public String getFirstName() {
         return firstName;
@@ -58,9 +59,6 @@ public class Client extends AbstractPersistable<Long> {
     }
 
     public List<LoanApplication> getLoan() {
-        if (loan == null) {
-            loan = new ArrayList<>();
-        }
         return loan;
     }
 
