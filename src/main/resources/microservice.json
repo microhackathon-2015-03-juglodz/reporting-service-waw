@@ -1,16 +1,5 @@
 {
   "waw": {
-    "this": "com/ofg/reporting-service-waw",
-    "dependencies": {
-      "loan-application-decision-maker-waw": {
-        "path": "com/ofg/loan-application-decision-maker-waw"
-      },
-      "loan-application-service-waw": {
-        "path": "com/ofg/loan-application-service-waw"
-      },
-      "client-service-waw": {
-        "path": "com/ofg/client-service-waw"
-      }
-    }
+    "this": "com/ofg/reporting-service-waw"
   }
 }
