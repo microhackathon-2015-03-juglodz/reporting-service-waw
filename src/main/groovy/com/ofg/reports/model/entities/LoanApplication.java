@@ -84,4 +84,17 @@ public class LoanApplication extends AbstractPersistable<Long> {
     public void setClient(Client client) {
         this.client = client;
     }
+
+    @Override
+    public String toString() {
+        return "LoanApplication{" +
+                "job='" + job + '\'' +
+                ", loanId='" + loanId + '\'' +
+                ", amount=" + amount +
+                ", fraudStatus='" + fraudStatus + '\'' +
+                ", decision='" + decision + '\'' +
+                ", client=" + client +
+                '}';
+    }
+
 }

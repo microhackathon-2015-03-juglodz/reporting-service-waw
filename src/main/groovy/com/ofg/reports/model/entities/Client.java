@@ -65,4 +65,15 @@ public class Client extends AbstractPersistable<Long> {
     public void setLoan(List<LoanApplication> loan) {
         this.loan = loan;
     }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", loan=" + loan +
+                '}';
+    }
+
 }
