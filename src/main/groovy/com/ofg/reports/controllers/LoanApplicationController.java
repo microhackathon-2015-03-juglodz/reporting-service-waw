@@ -3,6 +3,7 @@ package com.ofg.reports.controllers;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import com.google.common.collect.Lists;
 import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,12 +59,6 @@ public class LoanApplicationController {
             log.info("New loan");
             loan = new LoanApplication(model);
         }
-
-
-        // update client
-        Client client = clientRepository.findByLoanId(model.getLoanId());
-        loan.setClient(client);
-
         loanRepository.save(loan);
         return model;
     }
