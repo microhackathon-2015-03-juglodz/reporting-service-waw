@@ -2,6 +2,7 @@ package com.ofg.reports.controllers;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import com.google.common.collect.Lists;
 import org.codehaus.groovy.runtime.DefaultGroovyMethods;
@@ -51,10 +52,27 @@ public class LoanApplicationController {
         log.info("loan {}", model);
 
         LoanApplication loan = loanRepository.findByLoanId(model.getLoanId());
+        if (loan == null) {
+            log.info("New loan");
+            loan = new LoanApplication(model);
+            loanRepository.save(loan);
+        } else {
+            log.info("Already saved...");
+        }
+        return model;
+    }
+
+    @RequestMapping(value = "/reporting", method = PUT, headers="Accept=application/json")
+    @ApiOperation(value = "Put one loan")
+    public LoanApplicationDto updateLoan(@RequestBody LoanApplicationDto model) {
+        log.info("loan {}", model);
+
+        LoanApplication loan = loanRepository.findByLoanId(model.getLoanId());
         if (loan != null) {
             log.info("Update loan {}", loan);
             loan.setDecision(model.getDecision());
             loan.setFraudStatus(model.getFraudStatus());
+            loan.setJob(model.getJob());
         } else {
             log.info("New loan");
             loan = new LoanApplication(model);
