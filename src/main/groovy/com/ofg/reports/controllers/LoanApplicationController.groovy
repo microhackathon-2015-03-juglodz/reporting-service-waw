@@ -25,7 +25,7 @@ class LoanApplicationController {
     @Autowired
     private LoanApplicationRepository loanRepository
 
-    @RequestMapping(value = '/loan', method = GET)
+    @RequestMapping(value = '/reporting', method = GET)
     @ApiOperation(value = "Gets all loans")
     Iterable<LoanApplication> getLoans() {
         def loans = loanRepository.findAll()
@@ -33,12 +33,19 @@ class LoanApplicationController {
         return loans
     }
 
-    @RequestMapping(value = '/loan', method = PUT)
+    @RequestMapping(value = '/reporting', method = PUT)
     @ApiOperation(value = "Put one loan")
     LoanApplication saveLoan(LoanApplicationDto model) {
-        def loan = loanRepository.save(new LoanApplication(model))
-        log.info("Save loan {}", loan)
-        return loan
+        def loan = loanRepository.findByLoanId(model.getLoanId())
+        if (loan != null) {
+            log.info("Update loan {}", loan)
+            loan.setDecision(model.decision)
+            loan.setFraudStatus(model.fraudStatus)
+        } else {
+            log.info("New loan {}", loan)
+            loan = new LoanApplication(model)
+        }
+        return loanRepository.save(loan)
     }
 
 }
