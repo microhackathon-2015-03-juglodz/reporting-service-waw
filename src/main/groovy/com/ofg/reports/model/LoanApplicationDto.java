@@ -11,8 +11,7 @@ import com.ofg.reports.model.entities.Client;
 /**
  * @author mzielinski on 21.03.15.
  */
-@Entity
-public class LoanApplicationDto extends AbstractPersistable<Long> {
+public class LoanApplicationDto {
 
     private String job;
     private BigDecimal amount;
@@ -58,6 +57,17 @@ public class LoanApplicationDto extends AbstractPersistable<Long> {
 
     public void setLoanId(String loanId) {
         this.loanId = loanId;
+    }
+
+    @Override
+    public String toString() {
+        return "LoanApplicationDto{" +
+                "job='" + job + '\'' +
+                ", amount=" + amount +
+                ", fraudStatus='" + fraudStatus + '\'' +
+                ", decision='" + decision + '\'' +
+                ", loanId='" + loanId + '\'' +
+                '}';
     }
 
 }

@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-import com.ofg.reports.model.ClientDto;
-import com.ofg.reports.model.LoanApplicationDto;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import com.ofg.reports.model.ClientDto;
 
 /**
  * @author mzielinski on 21.03.15.

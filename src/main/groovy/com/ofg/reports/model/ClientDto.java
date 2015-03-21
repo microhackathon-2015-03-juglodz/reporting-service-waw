@@ -42,4 +42,13 @@ public class ClientDto {
         this.loanId = loanId;
     }
 
+    @Override
+    public String toString() {
+        return "ClientDto{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", loanId='" + loanId + '\'' +
+                '}';
+    }
 }
