@@ -38,7 +38,7 @@ public class ClientController {
     public Iterable<Client> getClients() {
         Iterable<Client> clients = clientRepository.findAll();
         log.info("Found client {}", clients);
-        return ((Iterable<Client>) (clients));
+        return clients;
     }
 
     @RequestMapping(value = "/client", method = POST, headers="Accept=application/json")
@@ -50,7 +50,6 @@ public class ClientController {
         if (loan != null) {
             client.getLoan().add(loan);
         }
-
         clientRepository.save(client);
         return model;
     }

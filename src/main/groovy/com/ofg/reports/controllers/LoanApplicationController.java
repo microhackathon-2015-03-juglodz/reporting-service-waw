@@ -51,13 +51,12 @@ public class LoanApplicationController {
     public LoanApplicationDto saveLoan(@RequestBody LoanApplicationDto model) {
         log.info("loan {}", model);
 
-        LoanApplication loan = loanRepository.findByLoanId(model.getLoanId());
+        final LoanApplication loan = loanRepository.findByLoanId(model.getLoanId());
         if (loan == null) {
             log.info("New loan");
-            loan = new LoanApplication(model);
-            loanRepository.save(loan);
+            loanRepository.save(new LoanApplication(model));
         } else {
-            log.info("Already saved...");
+            log.info("Loan {} already exists", loan.getLoanId());
         }
         return model;
     }
