@@ -3,8 +3,6 @@ package com.ofg.reports.model.entities;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -32,10 +30,6 @@ public class LoanApplication extends AbstractPersistable<Long> {
     private BigDecimal amount;
     private String fraudStatus;
     private String decision;
-
-    @ManyToOne
-    @JoinColumn
-    private Client client;
 
     public String getLoanId() {
         return loanId;
@@ -77,14 +71,6 @@ public class LoanApplication extends AbstractPersistable<Long> {
         this.decision = decision;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     @Override
     public String toString() {
         return "LoanApplication{" +
@@ -93,7 +79,6 @@ public class LoanApplication extends AbstractPersistable<Long> {
                 ", amount=" + amount +
                 ", fraudStatus='" + fraudStatus + '\'' +
                 ", decision='" + decision + '\'' +
-                ", client=" + client +
                 '}';
     }
 

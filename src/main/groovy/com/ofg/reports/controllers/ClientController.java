@@ -3,6 +3,8 @@ package com.ofg.reports.controllers;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.stream.StreamSupport;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,9 @@ public class ClientController {
     @ApiOperation(value = "Gets all clients")
     public Iterable<Client> getClients() {
         Iterable<Client> clients = clientRepository.findAll();
-        log.info("Found client {}", clients);
+        StreamSupport.stream(clients.spliterator(), false).forEach(c ->
+                        log.info("Found client {}", c)
+        );
         return clients;
     }
 
@@ -48,7 +52,7 @@ public class ClientController {
         Client client = new Client(model);
         LoanApplication loan = loanApplicationRepository.findByLoanId(model.getLoanId());
         if (loan != null) {
-            log.info("Load exists in database. Add to client", loan.getLoanId());
+            log.info("Loan {} exists in database. Add to client.", loan.getLoanId());
             client.getLoan().add(loan);
         }
         clientRepository.save(client);
