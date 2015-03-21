@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET
-import static org.springframework.web.bind.annotation.RequestMethod.PUT
+import static org.springframework.web.bind.annotation.RequestMethod.POST
 
 /**
  * @author mzielinski on 21.03.15.
@@ -33,9 +33,9 @@ class LoanApplicationController {
         return loans
     }
 
-    @RequestMapping(value = '/reporting', method = PUT)
+    @RequestMapping(value = '/reporting', method = POST)
     @ApiOperation(value = "Put one loan")
-    LoanApplication saveLoan(LoanApplicationDto model) {
+    LoanApplicationDto saveLoan(LoanApplicationDto model) {
         def loan = loanRepository.findByLoanId(model.getLoanId())
         if (loan != null) {
             log.info("Update loan {}", loan)
@@ -45,7 +45,8 @@ class LoanApplicationController {
             log.info("New loan {}", loan)
             loan = new LoanApplication(model)
         }
-        return loanRepository.save(loan)
+        loanRepository.save(loan)
+        return model
     }
 
 }

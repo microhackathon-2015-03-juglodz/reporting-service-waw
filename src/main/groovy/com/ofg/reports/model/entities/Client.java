@@ -21,6 +21,9 @@ public class Client extends AbstractPersistable<Long> {
     private String lastName;
     private int age;
 
+    public Client() {
+    }
+
     public Client(ClientDto dto) {
         firstName = dto.getFirstName();
         lastName = dto.getLastName();
